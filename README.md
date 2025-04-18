@@ -1,0 +1,2 @@
+Now you all can able to work in this project this is a setup project don't change anything lets get started with the create your routes by defining routes and you can import that routes and directly give in the server.js so example this route will handle the some thing
+example auth route will handle the authentication apis, register route will handle the registeration of user apis and you can see about the routes in youtube and also anywhere of internet
