@@ -24,7 +24,6 @@ app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-// serving the / root file
 app.use('/', require('./routes/root'))
 
 // For Not Exists pages
