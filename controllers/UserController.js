@@ -4,7 +4,7 @@ const { generateToken } = require("../utils/createToken");
 const bcrypt = require('bcrypt');
 
 //user registration
-exports.registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, role } = req.body;
 
   if (!name || !email || !password) return res.status(400).json({ 'message': 'Email, password and username required!' })
@@ -37,7 +37,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
 //userLogin
 
-exports.loginUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) return res.status(400).json({ 'message': 'Email and password are required.' });
 
@@ -63,7 +63,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
 
 //userLogout
-exports.logoutUser = asyncHandler(async (req, res) => {
+const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     expires: new Date(0),
@@ -76,7 +76,7 @@ exports.logoutUser = asyncHandler(async (req, res) => {
 const crypto = require('crypto');
 
 // Forgot Password - Direct token generation
-exports.forgotPassword = asyncHandler(async (req, res) => {
+const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
   const user = await User.findOne({ email });
@@ -105,7 +105,7 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
 });
 
 // Reset Password (unchanged)
-exports.resetPassword = asyncHandler(async (req, res) => {
+const resetPassword = asyncHandler(async (req, res) => {
   const { password } = req.body;
   const resetToken = req.params.token;
 
@@ -134,3 +134,11 @@ exports.resetPassword = asyncHandler(async (req, res) => {
     message: "Password reset successful"
   });
 });
+
+module.exports = {
+  registerUser,
+  loginUser,
+  logoutUser,
+  forgotPassword,
+  resetPassword
+}

@@ -24,7 +24,9 @@ app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/root'))
+app.use('/', require('./routes/root')); 
+app.use('/api/auth', require('./routes/authRoutes'))
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 // For Not Exists pages
 app.all(/.*/, (req, res) => {

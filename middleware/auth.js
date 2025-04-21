@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/UserModel");
 const { JWT_SECRET } = require("../config");
 
-exports.protect = async (req, res, next) => {
-  const token = req.cookies.token;
+const protect = async (req, res, next) => {
+  const token = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
     return res.status(401).json({ message: "No token found" });
@@ -23,3 +23,13 @@ exports.protect = async (req, res, next) => {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
+
+const adminOnly = (req, res, next) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied: Admins only' });
+  }
+  next();
+};
+
+
+module.exports = { protect, adminOnly }
