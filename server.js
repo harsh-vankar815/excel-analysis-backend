@@ -16,7 +16,10 @@ connectDB();
 
 app.use(logger);
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // your frontend origin
+    credentials: true
+}));
 
 app.use(express.json());
 
@@ -24,7 +27,7 @@ app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/root')); 
+app.use('/', require('./routes/root'));
 app.use('/api/auth', require('./routes/authRoutes'))
 app.use('/api/admin', require('./routes/adminRoutes'));
 

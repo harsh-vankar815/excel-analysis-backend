@@ -3,7 +3,7 @@ const User = require("../models/UserModel");
 const { JWT_SECRET } = require("../config");
 
 const protect = async (req, res, next) => {
-  const token = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
+  const token = req.cookies.token 
 
   if (!token) {
     return res.status(401).json({ message: "No token found" });
